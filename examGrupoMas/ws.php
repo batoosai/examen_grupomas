@@ -1,4 +1,6 @@
 <?php
+include_once './controller/siteController.php';
+
 if($_POST) {
     switch($_POST["action"]) {
         case "addItem": addItemAsync($_POST);
@@ -9,33 +11,51 @@ if($_POST) {
             break;
         case "deleteFromWarehouse": deleteItemFromWarehouseAsync($_POST);
             break;
-        case "addToWarehouse": addToWarehouse($_POST);
+        case "addToWarehouse": addToWarehouseAsync($_POST);
             break;
-        case "transferQuantity": transferQuantity($_POST);
+        case "transferQuantity": transferQuantityAsync($_POST);
+            break;
+        case "getWarehouseItems": warehouseItemsAsync($_POST);
             break;
     }
 }
 
 function addItemAsync($request) {
-    
+    $controller = new SiteController();
+    $data = $controller->addItem($request["data"]["name"], $request["data"]["buyPrice"], $request["data"]["sellPrice"]);
+    echo json_encode($data);
 } 
 
 function modifyItemAsync($request){
-    
+    $controller = new SiteController();
+    $data = $controller->modifyItem($request["data"]["name"], $request["data"]["buyPrice"], $request["data"]["sellPrice"], $request["data"]["id"]);
+    echo json_encode($data);
 }
 
 function deleteItemAsync($request){
-    
+    $controller = new SiteController();
+    $data = $controller->deleteItem($request["data"]["id"]);
+    echo json_encode($data);
 }
 
 function deleteItemFromWarehouseAsync($request) {
-    
+    $controller = new SiteController();
+    echo json_encode($data);
 }
 
-function addToWarehouse($request) {
-    
+function addToWarehouseAsync($request) {
+    $controller = new SiteController();
+    echo json_encode($data);
 }
 
-function transferQuantity($request) {
-    
+function transferQuantityAsync($request) {
+    $controller = new SiteController();
+    $data = $controller->transferProductToWarehouse($request["data"]["source"], $request["data"]["destination"], $request["data"]["item"], $request["data"]["quantity"]);
+    echo json_encode($data);
+}
+
+function warehouseItemsAsync($request) {
+    $controller = new SiteController();
+    $data = $controller->getProductsByWarehouse($request["data"]["id"]);
+    echo json_encode($data);
 }
