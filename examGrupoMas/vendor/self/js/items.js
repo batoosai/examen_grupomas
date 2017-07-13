@@ -14,10 +14,12 @@ $(document)
       ],
       callback: function(data) {
         if( data ) {
-          ajaxRequest({
+          var result = ajaxRequest({
             action: 'addItem',
             data: data
           })
+          if( result == true)
+            location.reload()
         }
       }
   })
@@ -28,32 +30,34 @@ $(document)
   buyPrice = $(ev.currentTarget).closest('tr').find('.buyPrice').text(),
   sellPrice = $(ev.currentTarget).closest('tr').find('.sellPrice').text()
   vex.dialog.open({
-      unsafeMessage: 'Modificar Item',
-      input: [
-        '<input type="hidden" name="id" value="'+id+'">',
-        '<div class="form-group">',
-        '<input class="form-control" name="name" placeholder="Nombre" value="'+name+'">',
-        '</div>',
-        '<div class="form-group">',
-        '<input class="form-control" name="buyPrice" placeholder="Precio de Compra" value="'+buyPrice+'">',
-        '</div>',
-        '<div class="form-group">',
-        '<input class="form-control" name="sellPrice" placeholder="Precio de Venta" value="'+sellPrice+'">',
-        '</div>',
-      ].join(''),
-      className: 'vex-theme-plain',
-      buttons: [
-          $.extend({}, vex.dialog.buttons.YES, { text: 'Guardar' }),
-          $.extend({}, vex.dialog.buttons.NO, { text: 'Cancelar' })
-      ],
-      callback: function(data) {
-        if( data ) {
-          ajaxRequest({
-            action: 'modifyItem',
-            data: data
-          })
-        }
+    unsafeMessage: 'Modificar Item',
+    input: [
+      '<input type="hidden" name="id" value="'+id+'">',
+      '<div class="form-group">',
+      '<input class="form-control" name="name" placeholder="Nombre" value="'+name+'">',
+      '</div>',
+      '<div class="form-group">',
+      '<input class="form-control" name="buyPrice" placeholder="Precio de Compra" value="'+buyPrice+'">',
+      '</div>',
+      '<div class="form-group">',
+      '<input class="form-control" name="sellPrice" placeholder="Precio de Venta" value="'+sellPrice+'">',
+      '</div>',
+    ].join(''),
+    className: 'vex-theme-plain',
+    buttons: [
+        $.extend({}, vex.dialog.buttons.YES, { text: 'Guardar' }),
+        $.extend({}, vex.dialog.buttons.NO, { text: 'Cancelar' })
+    ],
+    callback: function(data) {
+      if( data ) {
+        var result = ajaxRequest({
+          action: 'modifyItem',
+          data: data
+        })
+        if( result == true)
+          location.reload()
       }
+    }
   })
 })
 .on('click','.deleteItem',function(ev){
@@ -67,12 +71,14 @@ $(document)
       ],
       callback: function(data) {
         if( data ) {
-          ajaxRequest({
-            action: 'modifyItem',
+          var result = ajaxRequest({
+            action: 'deleteItem',
             data: {
               id: id
             }
           })
+          if( result == true)
+            location.reload()
         }
       }
   })

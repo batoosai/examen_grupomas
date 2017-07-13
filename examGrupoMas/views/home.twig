@@ -1,7 +1,6 @@
 {% extends 'template/base.twig' %}
 
 {% block content %}
-<pre>{{dump(almacenes)}}</pre>
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 table-responsive">
     <table class="table table-hover table-stripe">
@@ -9,13 +8,14 @@
         <tr>
           <th>Nombre del Almacén</th>
           <th>Número de Items</th>
+          <th>Mensaje</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         {% for almacen in almacenes.data %}
         <tr id="{{almacen.warehouse_id}}">
-          <td>{{almacen.name}}</td>
+          <td class="whname">{{almacen.name}}</td>
           <td>{{almacen.noItems}}</td>
           <td>{{almacen.inStock}}</td>
           <td>
