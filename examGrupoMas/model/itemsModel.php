@@ -70,13 +70,13 @@ class ItemsModel extends DatabaseConnector {
             $sqlResponse = $this->executeQueryWithResult($sql);
             
             if(!$sqlResponse) {
-                $response["data"] = $sqlResponse;
-                $response["message"] = "";
-                $response["status"] = true;
-            } else {
                 $response["data"] = null;
                 $response["message"] = $this->getMessage();
                 $response["status"] = false;
+            } else {
+                $response["data"] = $sqlResponse;
+                $response["message"] = "";
+                $response["status"] = true;
             }
         } catch (Exception $ex) {
             $response["message"] = $ex->getMessage();
