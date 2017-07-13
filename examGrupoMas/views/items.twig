@@ -1,22 +1,32 @@
 {% extends 'template/base.twig' %}
 
 {% block content %}
+<pre>{{dump(items)}}</pre>
 <div class="row">
-  <div class="col-xs-12 text-right"><button type="button" class="btn btn-lg addItem">Agregar Item</button>
+  <div class="col-xs-12 text-right"><button type="button" class="btn btn-primary addItem"><i class="fa fa-plus"></i></button>
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 table-responsive">
     <table class="table table-hover table-stripe">
       <thead>
         <tr>
           <th>Nombre del Item</th>
+          <th>Precio de Compra</th>
+          <th>Precio de Venta</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        {% for item in items %}
+        {% for item in items.data %}
         <tr id="{{item.id}}">
-          <td>{{item.nombre}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.buyPrice}}</td>
+          <td>{{item.sellPrice}}</td>
           <td>
-            <button type="button" class="btn btn-primary">Ver Items</button>
+            <button type="button" class="btn btn-success modifyItem">
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button type="button" class="btn btn-danger deleteItem">
+              <i class="fa fa-times"></i>
+            </button>
           </td>
         </tr>
         {% endfor %}

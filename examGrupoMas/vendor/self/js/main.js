@@ -27,10 +27,12 @@ $(document)
           $.extend({}, vex.dialog.buttons.NO, { text: 'Cancelar' })
       ],
       callback: function(data) {
-        ajaxRequest({
-          action: 'addItem',
-          data: data
-        })
+        if( data ) {
+          ajaxRequest({
+            action: 'addItem',
+            data: data
+          })
+        }
       }
   })
 })
@@ -50,10 +52,31 @@ $(document)
           $.extend({}, vex.dialog.buttons.NO, { text: 'Cancelar' })
       ],
       callback: function(data) {
-        ajaxRequest({
-          action: 'modifyItem',
-          data: data
-        })
+        if( data ) {
+          ajaxRequest({
+            action: 'modifyItem',
+            data: data
+          })
+        }
+      }
+  })
+})
+.on('click','.deleteItem',function(ev){
+  var id = $(ev.currentTarget).closest('tr').attr('id')
+  vex.dialog.confirm({
+      unsafeMessage: 'Eliminar Item',
+      className: 'vex-theme-plain',
+      buttons: [
+          $.extend({}, vex.dialog.buttons.YES, { text: 'Guardar' }),
+          $.extend({}, vex.dialog.buttons.NO, { text: 'Cancelar' })
+      ],
+      callback: function(data) {
+        if( data ) {
+          ajaxRequest({
+            action: 'modifyItem',
+            data: data
+          })
+        }
       }
   })
 })
