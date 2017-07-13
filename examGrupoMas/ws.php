@@ -17,6 +17,10 @@ if($_POST) {
             break;
         case "getWarehouseItems": warehouseItemsAsync($_POST);
             break;
+        case "getItems": getItemsAsync($_POST);
+            break;
+        case "getWarehouses": getWarehousesAsync($_POST);
+            break;
     }
 }
 
@@ -59,5 +63,17 @@ function transferQuantityAsync($request) {
 function warehouseItemsAsync($request) {
     $controller = new SiteController();
     $data = $controller->getProductsByWarehouse($request["data"]["id"]);
+    echo json_encode($data);
+}
+
+function getItemsAsync($request) {
+    $controller = new SiteController();
+    $data = $controller->getItems();
+    echo json_encode($data);
+}
+
+function getWarehousesAsync($request) {
+    $controller = new SiteController();
+    $data = $controller->getWarehouses();
     echo json_encode($data);
 }
