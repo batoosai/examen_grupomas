@@ -94,7 +94,7 @@ class ItemsModel extends DatabaseConnector {
             
             $response["status"] = $this->executeQueryNoResult($sql);
             
-            if(!response["status"]) { 
+            if(!$response["status"]) { 
                 $response["message"] = $this->getMessage(); 
             }
         } catch (Exception $ex) {
