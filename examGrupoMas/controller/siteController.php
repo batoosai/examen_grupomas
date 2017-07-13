@@ -143,7 +143,14 @@ class SiteController {
         
         try {
             if($quantity > 0) {
-                $response = $this->itemsModel->insertItemInWarehouse($warehouseId, $itemId, $quantity);
+                $itemInDB = $this->itemsModel->getItemFromWarehouse($warehouseId, $itemId);
+                
+                if(itemInDB != null) {
+                    $newQuantity = $itemInDB->quantity + $quantity;
+                    $response = $this->itemsModel->updateQuantity($warehouseId, $itemId, $newQuantity);
+                } else {
+                    $response = $this->itemsModel->insertItemInWarehouse($warehouseId, $itemId, $quantity);    
+                }
             } else {
                 $response = ["status" => false, "message" => "Valor negativo"];
             }
