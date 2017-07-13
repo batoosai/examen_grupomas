@@ -14,7 +14,7 @@ class WarehousesModel extends DatabaseConnector {
         $response = ["status" => false, "data" => [], "message" => ""];
         
         try {
-            $sql = "SELECT item_warehouse.warehouse_id, warehouses.name, count(*) as noItems, IF(in_stock.elements IS NULL, 'En stock','Falta stock') as inStock";
+            $sql = "SELECT warehouses.id AS warehouse_id, warehouses.name, count(item_warehouse.item_id) as noItems, IF(count(item_warehouse.item_id) = 0, 'Sin items', IF(in_stock.elements IS NULL, 'En stock','Falta stock'))";
             $sql .= " FROM warehouses";
             $sql .= " INNER JOIN item_warehouse";
             $sql .= " ON warehouses.id = item_warehouse.warehouse_id";
