@@ -10,15 +10,46 @@ $twig = new Twig_Environment($loader, array(
 
 echo $twig->render('almacenes.twig', array(
   'title'         => 'Almacenes',
-  'AlmacenActivo' => 'active'
-  'almacenes'     => [
-      [1],
-      [1],
-      [1],
-      [1],
-      [1],
-      [1],
-      [1],
-      [1],
-    ]
+  'AlmacenActivo' => 'active',
+  'almacenes' => [[
+    'id' => 1,
+      'nombre' => 'Nombre de Almacén',
+      'items' => 1,
+      'mensaje' => 'Un mensaje'
+    ],[
+      'id' => 1,
+      'nombre' => 'Nombre de Almacén',
+      'items' => 1,
+      'mensaje' => 'Un mensaje'
+    ],[
+      'id' => 1,
+      'nombre' => 'Nombre de Almacén',
+      'items' => 1,
+      'mensaje' => 'Un mensaje'
+    ],[
+      'id' => 1,
+      'nombre' => 'Nombre de Almacén',
+      'items' => 1,
+      'mensaje' => 'Un mensaje'
+    ],[
+      'id' => 1,
+      'nombre' => 'Nombre de Almacén',
+      'items' => 1,
+      'mensaje' => 'Un mensaje'
+    ],[
+      'id' => 1,
+      'nombre' => 'Nombre de Almacén',
+      'items' => 1,
+      'mensaje' => 'Un mensaje'
+    ],[
+      'id' => 1,
+      'nombre' => 'Nombre de Almacén',
+      'items' => 1,
+      'mensaje' => 'Un mensaje'
+    ],[
+      'id' => 1,
+      'nombre' => 'Nombre de Almacén',
+      'items' => 1,
+      'mensaje' => 'Un mensaje'
+    ]]
 ));

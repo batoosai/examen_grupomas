@@ -6,14 +6,14 @@
     <table class="table table-hover table-stripe">
       <thead>
         <tr>
-          <th>Nombre del Almacén</th>
-          <th></th>
+          <th>Nombre del Item</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        {% for almacen in almacenes %}
-        <tr>
-          <td>{{almacen.nombre}}</td>
+        {% for item in items %}
+        <tr id="{{item.id}}">
+          <td>{{item.nombre}}</td>
           <td>
             <button type="button" class="btn btn-primary">Ver Items</button>
           </td>
