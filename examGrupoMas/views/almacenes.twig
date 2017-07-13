@@ -7,15 +7,19 @@
       <thead>
         <tr>
           <th>Nombre del Almacén</th>
+          <th>Número de Items</th>
+          <th>Mensaje</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         {% for almacen in almacenes %}
-        <tr>
-          <td>{{almacen.nombre}}</td>
+        <tr id="{{almacen.warehouse_id}}">
+          <td>{{almacen.name}}</td>
+          <td>{{almacen.noItems}}</td>
+          <td>{{almacen.inStock}}</td>
           <td>
-            <button type="button" class="btn btn-primary">Ver Items</button>
+            <button type="button" class="btn btn-primary seeItem">Ver Items</button>
           </td>
         </tr>
         {% endfor %}
