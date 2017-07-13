@@ -1,6 +1,7 @@
 {% extends 'template/base.twig' %}
 
 {% block content %}
+<pre>{{dump(almacenes)}}</pre>
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 table-responsive">
     <table class="table table-hover table-stripe">
@@ -8,7 +9,7 @@
         <tr>
           <th>Nombre del Almacén</th>
           <th>Número de Items</th>
-          <th>Mensaje</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,9 @@
           <td>{{almacen.name}}</td>
           <td>{{almacen.noItems}}</td>
           <td>{{almacen.inStock}}</td>
+          <td>
+            <button type="button" class="btn btn-info verItemsWarehouse">Ver Items</button>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -24,4 +28,8 @@
   </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="./vendor/self/js/home.js"></script>
 {% endblock %}

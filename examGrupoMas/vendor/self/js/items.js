@@ -1,4 +1,3 @@
-
 $(document)
 .on('click','.addItem',function(ev){
   vex.dialog.open({
@@ -70,7 +69,9 @@ $(document)
         if( data ) {
           ajaxRequest({
             action: 'modifyItem',
-            data: data
+            data: {
+              id: id
+            }
           })
         }
       }

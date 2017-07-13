@@ -13,6 +13,7 @@ function ajaxRequest(data){
       } else {
         alertify.error(res.message)
       }
+      return res
     }
   })
 }
