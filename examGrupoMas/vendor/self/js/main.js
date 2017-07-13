@@ -8,6 +8,7 @@ function ajaxRequest(data){
     },
     success: function(res){
       console.log(res)
+      location.reload()
     }
   })
 }
