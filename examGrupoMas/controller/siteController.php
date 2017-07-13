@@ -68,8 +68,9 @@ class SiteController {
                 
                 if($destinationItem != null) {
                     $destNewQuantity = $destinationItem[0]["quantity"] + $quantity;
+                    $this->itemsModel->updateQuantity($warehouseDestination, $item_id, $destNewQuantity);
                 } else {
-                    
+                    $this->itemsModel->insertItemInWarehouse($warehouseDestination, $item_id, $quantity);
                 }
             }
         } catch (Exception $ex) {
