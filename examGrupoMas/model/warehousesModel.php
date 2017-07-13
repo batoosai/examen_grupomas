@@ -1,4 +1,6 @@
 <?php
+include_once __DIR__ . "/connection.php";
+
 class WarehousesModel extends DatabaseConnector {
     public function __construct() {
         parent::__construct();
