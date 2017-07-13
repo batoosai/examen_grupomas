@@ -142,5 +142,70 @@ class ItemsModel extends DatabaseConnector {
         return $response;
     }
      
+    public function getItemFromWarehouse($warehouse_id, $item_id) {
+        $response = ["status" => false, "data" => null, "message" => ""];
+        
+        try {
+            $sql = "SELECT item_warehouse.item_id, item_warehouse.quantity";
+            $sql .= " FROM item_warehouse";
+            $sql .= " WHERE warehouse_id = $warehouse_id";
+            $sql .= " AND item_id = $item_id";
+            $sql .= " AND active = 1";
+            
+            $sqlResponse = $this->executeQueryWithResult($sql);
+            
+            if(!$sqlResponse) {
+                $response["status"] = false;
+                $response["message"] = $this->getMessage();
+                $response["data"] = null;
+            } else {
+                $response["status"] = true;
+                $response["message"] = "";
+                $response["data"] = $sqlResponse;
+            }
+        } catch (Exception $ex) {
+            $response["message"] = $ex->getMessage();
+        }
+        
+        return $response;
+    }
     
+    public function updateQuantity($warehouseId, $itemId, $quantity) {
+        $response = ["status" => false, "message" => ""];
+        
+        try {
+            $sql = "UPDATE item_warehouse";
+            $sql .= " SET quantity = $quantity";
+            $sql .= " WHERE warehouse_id = $warehouseId";
+            $sql .= " AND item_id = $itemId";
+            
+            $response["status"] = $this->executeQueryNoResult($sql);
+            
+            if(!$response["status"]) {
+                $response["message"] = $this->getMessage();
+            }
+        } catch (Exception $ex) {
+        }
+        
+        return $response;
+    }
+    
+    public function insertItemInWarehouse($warehouseId, $itemId, $quantity) {
+        $response = ["status" => false, "message" => ""];
+        
+        try {
+            $sql = "INSERT INTO item_warehouse(warehouse_id, item_id, quantity)";
+            $sql .= " VALUES($warehouseId, $itemId, $quantity)";
+            
+            $response["status"] = $this->executeQueryNoResult($sql);
+            
+            if(!$response){
+                $response["message"] = $this->getMessage();
+            }
+        } catch (Exception $ex) {
+            $response["message"] = $ex->getMessage();
+        }
+        
+        return $response;
+    }
 }

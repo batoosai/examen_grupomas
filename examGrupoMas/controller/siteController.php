@@ -54,7 +54,72 @@ class SiteController {
         $response = null;
         
         try {
+            $sourceItem = $this->itemsModel->getItemFromWarehouse($warehouseSource, $item_id);
+            $destinationItem = $this->itemsModel->getItemFromWarehouse($warehouseDestination, $item_id);
+            
+            if($sourceItem != null) {
+                $sourceNewQuantity = $sourceItem[0]["quantity"] - $quantity;
+                
+                if($sourceNewQuantity <= 0) {
+                    $this->itemsModel->deleteFromWarehouse($item_id, $warehouseSource);
+                } else {
+                    $this->itemsModel->updateQuantity($warehouseSource, $item_id, $sourceNewQuantity);
+                }
+                
+                if($destinationItem != null) {
+                    $destNewQuantity = $destinationItem[0]["quantity"] + $quantity;
+                } else {
+                    
+                }
+            }
         } catch (Exception $ex) {
+        }
+        
+        return $response;
+    }
+    
+    public function getItems() {
+        $response = null;
+        
+        try {
+            $response = $this->itemsModel->getItems();
+        } catch (Exception $ex) {
+        }
+        
+        return $response;
+    }
+    
+    public function addItem($name, $buyPrice, $sellPrice) {
+        $response = null;
+        
+        try {
+            $response = $this->itemsModel->addNewItem($name, $buyPrice, $sellPrice);
+        } catch (Exception $ex) {
+
+        }
+        
+        return $response;
+    }
+    
+    public function modifyItem($name, $buyPrice, $sellPrice, $id) {
+        $response = null;
+        
+        try {
+            $response = $this->itemsModel->modifyItem($name, $buyPrice, $sellPrice, $id);
+        } catch (Exception $ex) {
+
+        }
+        
+        return $response;
+    }
+    
+    public function deleteItem($id) {
+        $response = null;
+        
+        try {
+            $response = $this->itemsModel->deleteItem($id);
+        } catch (Exception $ex) {
+
         }
         
         return $response;
