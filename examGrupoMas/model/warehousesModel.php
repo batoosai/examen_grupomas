@@ -23,7 +23,43 @@ class WarehousesModel extends DatabaseConnector {
             $sql .= " GROUP BY warehouses.id, in_stock.warehouse_id";
             $sql .= " ORDER BY warehouses.name";
             
-            $response["data"] = $this->executeQueryWithResult($sql);
+            $sqlResult = $this->executeQueryWithResult($sql);
+            
+            if(!$sqlResult) {
+                $response["data"] = null;
+                $response["status"] = false;
+                $response["message"] = $this->getMessage();
+            } else {
+                $response["data"] = $sqlResult;
+                $response["status"] = true;
+                $response["message"] = "";
+            }
+        } catch (Exception $ex) {
+            $response["message"] = $ex->getMessage();
+        }
+        
+        return $response;
+    }
+    
+    public function getWarehouses() {
+        $response = ["status" => false, "data" => null, "message" => ""];
+        
+        try {
+            $sql = "SELECT warehouses.id, warehouses.name";
+            $sql .= " FROM warehouses";
+            $sql .= " WHERE active = 1";
+            
+            $sqlResult = $this->executeQueryWithResult($sql);
+            
+            if(!$sqlResult) {
+                $response["status"] = false;
+                $response["data"] = null;
+                $response["message"] = $this->getMessage();
+            } else {
+                $response["status"] = true;
+                $response["data"] = $sqlResult;
+                $response["message"] = "";
+            }
         } catch (Exception $ex) {
             $response["message"] = $ex->getMessage();
         }

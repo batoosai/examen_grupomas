@@ -1,7 +1,7 @@
 <?php
-    $_HOST = "www.mercsoft.mx";
-    $_USER = "remote";
+    $_HOST = "localhost";
+    $_USER = "web";
     $_PASS = "soporte";
-    $_DB = "infecciosas";
-    $_PORT = "3306"
+    $_DB = "examengrupomas";
+    $_PORT = "3306";
 ?>
