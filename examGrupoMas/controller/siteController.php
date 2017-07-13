@@ -124,4 +124,32 @@ class SiteController {
         
         return $response;
     }
+    
+    public function deleteFromWarehouse($warehouseId, $itemId){
+        $response = null;
+        
+        try {
+            $response = $this->itemsModel->deleteFromWarehouse($itemId, $warehouseId);
+        } catch (Exception $ex) {
+
+        }
+        
+        return $response;
+    }
+    
+    public function addToWarehouse($warehouseId, $itemId, $quantity) {
+        $response = null;
+        
+        try {
+            if($quantity > 0) {
+                $response = $this->itemsModel->insertItemInWarehouse($warehouseId, $itemId, $quantity);
+            } else {
+                $response = ["status" => false, "message" => "Valor negativo"];
+            }
+        } catch (Exception $ex) {
+
+        }
+        
+        return $response;
+    }
 }

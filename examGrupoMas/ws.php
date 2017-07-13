@@ -40,11 +40,13 @@ function deleteItemAsync($request){
 
 function deleteItemFromWarehouseAsync($request) {
     $controller = new SiteController();
+    $data = $controller->deleteFromWarehouse($request["data"]["warehouse"], $request["data"]["item"]);
     echo json_encode($data);
 }
 
 function addToWarehouseAsync($request) {
     $controller = new SiteController();
+    $data = $controller->addToWarehouse($request["data"]["warehouse"], $request["data"]["item"], $request["data"]["quantity"]);
     echo json_encode($data);
 }
 
