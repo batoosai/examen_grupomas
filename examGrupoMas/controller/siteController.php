@@ -68,8 +68,9 @@ class SiteController {
                 
                 if($destinationItem != null) {
                     $destNewQuantity = $destinationItem[0]["quantity"] + $quantity;
+                    $this->itemsModel->updateQuantity($warehouseDestination, $item_id, $destNewQuantity);
                 } else {
-                    
+                    $this->itemsModel->insertItemInWarehouse($warehouseDestination, $item_id, $quantity);
                 }
             }
         } catch (Exception $ex) {
@@ -142,7 +143,14 @@ class SiteController {
         
         try {
             if($quantity > 0) {
-                $response = $this->itemsModel->insertItemInWarehouse($warehouseId, $itemId, $quantity);
+                $itemInDB = $this->itemsModel->getItemFromWarehouse($warehouseId, $itemId);
+                
+                if(itemInDB != null) {
+                    $newQuantity = $itemInDB->quantity + $quantity;
+                    $response = $this->itemsModel->updateQuantity($warehouseId, $itemId, $newQuantity);
+                } else {
+                    $response = $this->itemsModel->insertItemInWarehouse($warehouseId, $itemId, $quantity);    
+                }
             } else {
                 $response = ["status" => false, "message" => "Valor negativo"];
             }
