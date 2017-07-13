@@ -2,13 +2,17 @@ function ajaxRequest(data){
   $.ajax({
     url: './ws.php',
     type: 'post',
+    datatype: 'json',
     data: {
       action: data.action,
       data: data.data
     },
     success: function(res){
-      console.log(res)
-      location.reload()
+      if( res.status == true ) {
+        location.reload()
+      } else {
+        alertify.error(res.message)
+      }
     }
   })
 }
@@ -38,14 +42,23 @@ $(document)
   })
 })
 .on('click','.modifyItem',function(ev){
-  var id = $(ev.currentTarget).closest('tr').attr('id')
+  var id = $(ev.currentTarget).closest('tr').attr('id'),
+  name = $(ev.currentTarget).closest('tr').find('.name').text(),
+  buyPrice = $(ev.currentTarget).closest('tr').find('.buyPrice').text(),
+  sellPrice = $(ev.currentTarget).closest('tr').find('.sellPrice').text()
   vex.dialog.open({
       unsafeMessage: 'Modificar Item',
       input: [
         '<input type="hidden" name="id" value="'+id+'">',
-        '<div class="form-group"><input class="form-control" name="name" placeholder="Nombre"></div>',
-        '<div class="form-group"><input class="form-control" name="buyPrice" placeholder="Precio de Compra"></div>',
-        '<div class="form-group"><input class="form-control" name="sellPrice" placeholder="Precio de Venta"></div>',
+        '<div class="form-group">',
+        '<input class="form-control" name="name" placeholder="Nombre" value="'+name+'">',
+        '</div>',
+        '<div class="form-group">',
+        '<input class="form-control" name="buyPrice" placeholder="Precio de Compra" value="'+buyPrice+'">',
+        '</div>',
+        '<div class="form-group">',
+        '<input class="form-control" name="sellPrice" placeholder="Precio de Venta" value="'+sellPrice+'">',
+        '</div>',
       ].join(''),
       className: 'vex-theme-plain',
       buttons: [

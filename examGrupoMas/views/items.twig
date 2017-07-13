@@ -16,9 +16,9 @@
       <tbody>
         {% for item in items.data %}
         <tr id="{{item.id}}">
-          <td>{{item.name}}</td>
-          <td>{{item.buyPrice}}</td>
-          <td>{{item.sellPrice}}</td>
+          <td class="name">{{item.name}}</td>
+          <td class="buyPrice">{{item.buyPrice}}</td>
+          <td class="sellPrice">{{item.sellPrice}}</td>
           <td>
             <button type="button" class="btn btn-success modifyItem">
               <i class="fa fa-pencil"></i>
