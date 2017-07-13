@@ -12,7 +12,7 @@ class ItemsModel extends DatabaseConnector {
         $response = ["status" => false, "data" => null, "message" => ""];
         
         try {
-            $sql = "SELECT items.id, items.name, items.buyPrice, items.sellPrice";
+            $sql = "SELECT items.id, items.name, item_warehouse.quantity";
             $sql .= " FROM items, item_warehouse";
             $sql .= " WHERE items.id = item_warehouse.item_id";
             $sql .= " AND item_warehouse.warehouse_id = $warehouseId";
@@ -61,7 +61,7 @@ class ItemsModel extends DatabaseConnector {
         $response = ["status" => false, "data" => null, "message" => ""];
         
         try {
-            $sql = "SELECT items.id, items.name";
+            $sql = "SELECT items.id, items.name, items.buyPrice, items.sellPrice";
             $sql .= " FROM items";
             $sql .= " WHERE items.active = 1";
             

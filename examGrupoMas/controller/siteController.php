@@ -1,12 +1,15 @@
 <?php
 
 include './model/warehousesModel.php';
+include './model/itemsModel.php';
 
 class SiteController {
-    private $model;
+    private $warehouseModel;
+    private $itemsModel;
     
     public function __construct() {
-        $this->model = new WarehousesModel();
+        $this->warehouseModel = new WarehousesModel();
+        $this->itemsModel = new ItemsModel();
     }
     
     public function __destruct() {
@@ -17,9 +20,41 @@ class SiteController {
         $response = null;
         
         try {
-            $response = $this->model->getWarehousesInformation();
+            $response = $this->warehouseModel->getWarehousesInformation();
         } catch (Exception $ex) {
 
+        }
+        
+        return $response;
+    }
+    
+    public function getWarehouses() {
+        $response = null;
+        
+        try {
+            $response = $this->warehouseModel->getWarehouses();
+        } catch (Exception $ex) {
+        }
+        
+        return $response;
+    }
+    
+    public function getProductsByWarehouse($id) {
+        $response = null;
+        
+        try {
+            $response = $this->itemsModel->getItemsByWarehouse($id);
+        } catch (Exception $ex) {
+        }
+        
+        return $response;
+    }
+    
+    public function transferProductToWarehouse($warehouseSource, $warehouseDestination, $item_id, $quantity) {
+        $response = null;
+        
+        try {
+        } catch (Exception $ex) {
         }
         
         return $response;
